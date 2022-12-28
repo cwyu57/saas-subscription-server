@@ -1,10 +1,10 @@
 import express from 'express';
 import asyncHandler from 'express-async-handler';
 
-import { v1GetHealthcheck } from '../controller';
+import { v1PostRegister } from '../controller';
 
 const router = express.Router();
 
-router.get('/system/v1/healthcheck', asyncHandler(v1GetHealthcheck));
+router.post('/user/v1/register', asyncHandler(v1PostRegister));
 
 export default router;
