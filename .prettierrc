@@ -1,0 +1,29 @@
+printWidth: 80
+tabWidth: 2
+useTabs: false
+semi: true
+singleQuote: true
+quoteProps: consistent
+# jsxSingleQuote
+trailingComma: all
+bracketSpacing: true
+# jsxBracketSameLine
+arrowParens: avoid
+# rangeStart
+# rangeEnd
+# parser
+# filepath
+requirePragma: false
+insertPragma: false
+proseWrap: always
+# htmlWhitespaceSensitivity
+# vueIndentScriptAndStyle
+endOfLine: lf
+# embeddedLanguageFormatting
+overrides:
+  - files: .prettierrc
+    options:
+      parser: yaml
+  - files: .eslintrc
+    options:
+      parser: yaml
