@@ -1,6 +1,11 @@
 import { StatusCodes, ReasonPhrases } from 'http-status-codes';
 import { errorCodes } from '../const';
-import { ResponseError, UserEntity, UserRegisterInput } from '../entity';
+import {
+  ResponseError,
+  UserEntity,
+  UserRegisterInput,
+  UserRegisterOutput,
+} from '../entity';
 import { UserRepositoryInterface } from '../repository/user';
 import { HashServiceInterface } from '../service/hash';
 
@@ -17,7 +22,7 @@ export class UserRegisterUseCase {
     this.userRepository = userRepository;
   }
 
-  async exec(input: UserRegisterInput): Promise<UserEntity> {
+  async exec(input: UserRegisterInput): Promise<UserRegisterOutput> {
     if (await this.userRepository.isEmailExist(input.email)) {
       throw new ResponseError(
         errorCodes.EXISTING_EMAIL,
@@ -33,6 +38,11 @@ export class UserRegisterUseCase {
     });
 
     await this.userRepository.registerUser(userEntity);
-    return userEntity;
+
+    return {
+      user: userEntity,
+      accessToken: '',
+      refreshToken: '',
+    };
   }
 }

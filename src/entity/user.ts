@@ -1,13 +1,19 @@
+export type UserDto = {
+  id: string;
+  name: string;
+  email: string;
+};
+
 export type UserRegisterInput = {
   name: string;
   email: string;
   password: string;
 };
 
-export type UserDto = {
-  id: string;
-  name: string;
-  email: string;
+export type UserRegisterOutput = {
+  user: UserDto;
+  accessToken: string;
+  refreshToken: string;
 };
 
 export class UserEntity {

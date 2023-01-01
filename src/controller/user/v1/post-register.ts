@@ -18,10 +18,9 @@ export const v1PostRegister: express.Handler = async (req, res) => {
     bcryptHashService,
     userRepository,
   );
-  const userEntity = await userRegisterUseCase.exec(input);
-  const userDto = userEntity.toDto();
+  const userRegisterOutput = await userRegisterUseCase.exec(input);
 
   res.status(StatusCodes.OK).json({
-    data: userDto,
+    data: userRegisterOutput,
   });
 };
