@@ -5,18 +5,22 @@ export type UserRegisterInput = {
 };
 
 export type UserDto = {
+  id: string;
   name: string;
   email: string;
 };
 
 export class UserEntity {
+  id: string;
+
   name: string;
 
   email: string;
 
   password: string;
 
-  constructor(params: UserRegisterInput) {
+  constructor(params: UserRegisterInput & { id: string }) {
+    this.id = params.id;
     this.name = params.name;
     this.email = params.email;
     this.password = params.password;
@@ -24,6 +28,7 @@ export class UserEntity {
 
   toDto(): UserDto {
     return {
+      id: this.id,
       name: this.name,
       email: this.email,
     };

@@ -1,18 +1,38 @@
-import { UserEntity, UserRegisterInput } from '../entity';
+import { uuid } from 'uuidv4';
+import { UserEntity } from '../entity';
 
 export interface UserRepositoryInterface {
-  isUserExist: (email: string) => Promise<boolean>;
-  registerUser: (input: UserRegisterInput) => Promise<UserEntity>;
+  genUserId: () => Promise<string>;
+  isUserIdExist: (id: string) => Promise<boolean>;
+  isEmailExist: (email: string) => Promise<boolean>;
+  registerUser: (userEntity: UserEntity) => Promise<void>;
 }
 
-export class UserRepository implements UserRepositoryInterface {
+export class InMemoryUserRepository implements UserRepositoryInterface {
+  static store: { [key: string]: UserEntity } = {};
+
   // eslint-disable-next-line class-methods-use-this
-  async isUserExist(email: string): Promise<boolean> {
-    return false;
+  async genUserId(): Promise<string> {
+    // const id = InMemoryUserRepository.autoIncrement;
+    // InMemoryUserRepository.autoIncrement += 1;
+    // return id;
+    return uuid();
   }
 
   // eslint-disable-next-line class-methods-use-this
-  async registerUser(input: UserRegisterInput): Promise<UserEntity> {
-    return new UserEntity(input);
+  async isUserIdExist(id: string) {
+    return Object.keys(InMemoryUserRepository.store).some(key => key === id);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  async isEmailExist(email: string): Promise<boolean> {
+    return Object.values(InMemoryUserRepository.store).some(
+      e => e.email === email,
+    );
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  async registerUser(userEntity: UserEntity): Promise<void> {
+    InMemoryUserRepository.store[userEntity.id] = userEntity;
   }
 }
