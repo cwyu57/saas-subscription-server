@@ -1,4 +1,4 @@
-export const EXISTING_EMAIL = '0000';
-export const JWT_TOKEN_ERROR = '0001';
-export const MISSING_SYSTEM_API_KEY = '0002';
-export const WRONG_SYSTEM_API_KEY = '0003';
+export const EXISTING_EMAIL = 'EXISTING_EMAIL';
+export const JWT_TOKEN_ERROR = 'JWT_TOKEN_ERROR';
+export const MISSING_SYSTEM_API_KEY = 'MISSING_SYSTEM_API_KEY';
+export const WRONG_SYSTEM_API_KEY = 'WRONG_SYSTEM_API_KEY';
