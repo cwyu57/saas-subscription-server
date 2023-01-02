@@ -1,0 +1,282 @@
+openapi: '3.0.3'
+
+info:
+  title: 'SAAS Subescription Server API'
+  description: 'SAAS Subescription Server API Documentation'
+  contact:
+    name: 'Yu, Chun-Wei'
+    email: 'cwyu57@gmail.com'
+  version: '0.0.0'
+
+tags:
+  - name: user
+  - name: swagger
+  - name: system
+
+components:
+  schemas:
+    ConfigDTO:
+      type: object
+      properties:
+        environment:
+          type: string
+        privateKeyPath:
+          type: string
+        publicKeyPath:
+          type: string
+        swaggerUsername:
+          type: string
+        swaggerPassword:
+          type: string
+        systemApiKey:
+          type: string
+    Error:
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            statusCode:
+              type: number
+            message:
+              type: string
+            requestId:
+              type: string
+  securitySchemes:
+    bearerAuth: # <-- arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    basicAuth: # <-- arbitrary name for the security scheme
+      type: http
+      scheme: basic
+    system-api-key:
+      type: apiKey
+      in: header
+      name: system-api-key
+  requestBodies:
+    register:
+      content:
+        application/json:
+          schema:
+            properties:
+              email:
+                description: email
+                type: string
+              name:
+                description: 名稱
+                type: string
+            required:
+              - email
+              - name
+  responses:
+    200-get-system-v1-config:
+      description: OK
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: '#/components/schemas/ConfigDTO'
+    200-get-system-v1-healthcheck:
+      description: OK
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: ok
+    400-post-member-v1-phone-register:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            bad-request-error-invalid-email-in-body:
+              $ref: '#/components/examples/bad-request-error-invalid-email-in-body'
+    400-put-member-v1-user:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            bad-request-error-invalid-email-in-body:
+              $ref: '#/components/examples/bad-request-error-invalid-email-in-body'
+    400-get-system-v1-config:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            bad-request-error-missing-header-system-api-key:
+              $ref: '#/components/examples/bad-request-error-missing-header-system-api-key'
+    400-get-system-v1-healthcheck:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            bad-request-error-missing-header-system-api-key:
+              $ref: '#/components/examples/bad-request-error-missing-header-system-api-key'
+    401-get-member-v1-user:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            unauthroized-error:
+              $ref: '#/components/examples/unauthroized-error'
+    401-put-member-v1-user:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            unauthroized-error:
+              $ref: '#/components/examples/unauthroized-error'
+    401-swagger-api-docs:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            unauthroized-error:
+              $ref: '#/components/examples/unauthroized-error'
+    401-get-system-v1-config:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            unauthroized-error-wrong-system-api-key:
+              $ref: '#/components/examples/unauthroized-error-wrong-system-api-key'
+    401-get-system-v1-healthcheck:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            unauthroized-error-wrong-system-api-key:
+              $ref: '#/components/examples/unauthroized-error-wrong-system-api-key'
+    500-swagger-api-docs:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            internal-server-error:
+              $ref: '#/components/examples/internal-server-error'
+  examples:
+    bad-request-error-invalid-email-in-body:
+      value:
+        error:
+          statusCode: 400
+          code: 'IB000-0001'
+          message: 'Bad Request'
+          requestId: '...'
+    bad-request-error-missing-header-system-api-key:
+      value:
+        error:
+          statusCode: 400
+          code: 'A0000-0003'
+          message: 'Bad Request'
+          requestId: '...'
+    unauthroized-error:
+      value:
+        error:
+          statusCode: 401
+          code: 'A0000-0001'
+          message: 'Unauthroized'
+          requestId: '...'
+    unauthroized-error-wrong-system-api-key:
+      value:
+        error:
+          statusCode: 401
+          code: 'A0000-0002'
+          message: 'Unauthroized'
+          requestId: '...'
+    user-login:
+      value:
+        data:
+          accessToken: ...
+          refreshToken: ...
+          user:
+            id: ...
+            nickname: ...
+            email: user@example.com
+            emailVerified: false
+            phoneNumber: ...
+            avatar: ...
+            cover: ...
+            biography: ...
+    user-login-not-found:
+      value:
+        code: D0000-0003
+    internal-server-error:
+      value:
+        error:
+          statusCode: 500
+          code: 'D0000-0001'
+          message: 'Internal Server Error'
+          requestId: '...'
+
+paths:
+  /swagger/api-docs:
+    get:
+      tags:
+        - swagger
+      operationId: /swagger/api-docs
+      description: 取得 Swagger API 文件
+      security:
+        - basicAuth: []
+      responses:
+        200:
+          description: OK
+        401:
+          $ref: '#/components/responses/401-swagger-api-docs'
+        500:
+          $ref: '#/components/responses/500-swagger-api-docs'
+
+  /system/v1/config:
+    get:
+      tags:
+        - system
+      operationId: /system/v1/config
+      description: 取得系統 config
+      security:
+        - system-api-key: []
+      responses:
+        200:
+          $ref: '#/components/responses/200-get-system-v1-config'
+        400:
+          $ref: '#/components/responses/400-get-system-v1-config'
+        401:
+          $ref: '#/components/responses/401-get-system-v1-config'
+
+  /system/v1/healthcheck:
+    get:
+      tags:
+        - system
+      operationId: /system/v1/healthcheck
+      description: Health Check
+      security:
+        - system-api-key: []
+      responses:
+        200:
+          $ref: '#/components/responses/200-get-system-v1-healthcheck'
+        400:
+          $ref: '#/components/responses/400-get-system-v1-healthcheck'
+        401:
+          $ref: '#/components/responses/401-get-system-v1-healthcheck'
