@@ -7,6 +7,7 @@ export const errorHandler: express.ErrorRequestHandler = (
   res,
   next,
 ) => {
+  console.error('error =', err);
   res
     .status(StatusCodes.INTERNAL_SERVER_ERROR)
     .json(ReasonPhrases.INTERNAL_SERVER_ERROR);

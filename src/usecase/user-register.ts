@@ -8,6 +8,7 @@ import {
 } from '../entity';
 import { UserRepositoryInterface } from '../repository/user';
 import { HashServiceInterface } from '../service/hash';
+import { JwtService } from '../service/jwt';
 
 export class UserRegisterUseCase {
   hashService: HashServiceInterface;
@@ -40,9 +41,9 @@ export class UserRegisterUseCase {
     await this.userRepository.registerUser(userEntity);
 
     return {
-      user: userEntity,
-      accessToken: '',
-      refreshToken: '',
+      user: userEntity.toDto(),
+      accessToken: JwtService.generateAccessToken({ id: userEntity.id }),
+      refreshToken: JwtService.generateRefreshToken({ id: userEntity.id }),
     };
   }
 }

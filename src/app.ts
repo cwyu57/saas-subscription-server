@@ -1,11 +1,14 @@
 import express from 'express';
 import { errorHandler } from './controller';
-import { swaggerRouter, systemRouter } from './routes';
+import { swaggerRouter, systemRouter, userRouter } from './routes';
 
 const app = express();
 
+app.use(express.json());
+
 app.use(swaggerRouter);
 app.use(systemRouter);
+app.use(userRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

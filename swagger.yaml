@@ -56,7 +56,7 @@ components:
       in: header
       name: system-api-key
   requestBodies:
-    register:
+    user-register:
       content:
         application/json:
           schema:
@@ -71,6 +71,28 @@ components:
               - email
               - name
   responses:
+    200-post-user-register:
+      description: OK
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      email:
+                        type: string
+                  accessToken:
+                    type: string
+                  refreshToken:
+                    type: string
     200-get-system-v1-config:
       description: OK
       content:
@@ -233,6 +255,22 @@ components:
           requestId: '...'
 
 paths:
+  /user/v1/register:
+    post:
+      tags:
+        - user
+      operationId: /user/v1/register
+      description: 使用者註冊
+      requestBody:
+        $ref: '#/components/requestBodies/user-register'
+      responses:
+        200:
+          $ref: '#/components/responses/200-post-user-register'
+        # 401:
+        #   $ref: '#/components/responses/401-swagger-api-docs'
+        # 500:
+        #   $ref: '#/components/responses/500-swagger-api-docs'
+
   /swagger/api-docs:
     get:
       tags:

@@ -3,15 +3,21 @@ import { StatusCodes, ReasonPhrases } from 'http-status-codes';
 
 import { privateKey, publicKey } from '../loader';
 import { ResponseError } from '../entity';
-import { errorCodes } from '../const';
+import { A_DAY_IN_SECONDS, errorCodes, SEVEN_DAYS_IN_SECONDS } from '../const';
 
 export class JwtService {
-  static generateAccessToken(data: any): string {
-    return jwt.sign(data, privateKey, { algorithm: 'RS256', expiresIn: 86400 });
+  static generateAccessToken(data: object): string {
+    return jwt.sign(data, privateKey, {
+      algorithm: 'RS256',
+      expiresIn: A_DAY_IN_SECONDS,
+    });
   }
 
-  static generateRefreshToken() {
-    return '';
+  static generateRefreshToken(data: object) {
+    return jwt.sign(data, privateKey, {
+      algorithm: 'RS256',
+      expiresIn: SEVEN_DAYS_IN_SECONDS,
+    });
   }
 
   static verifyToken(token: string) {
