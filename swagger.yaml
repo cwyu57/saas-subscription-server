@@ -291,7 +291,7 @@ paths:
       tags:
         - user
       operationId: /user/v1/profile
-      description: 取得使用者資訓
+      description: 取得使用者資訊
       security:
         - bearerAuth: []
       responses:
