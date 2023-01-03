@@ -1,8 +1,7 @@
 import express from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { UserRegisterInput } from '../../../entity';
-import { InMemoryUserRepository } from '../../../repository';
-import { BcryptHashService } from '../../../service/hash';
+import { bcryptHashService, mySqlUserRepository } from '../../../container';
 import { UserRegisterUseCase } from '../../../usecase';
 
 export const v1PostRegister: express.Handler = async (req, res) => {
@@ -11,12 +10,10 @@ export const v1PostRegister: express.Handler = async (req, res) => {
     name: req.body.name,
     password: req.body.password,
   };
-  const userRepository = new InMemoryUserRepository();
-  const bcryptHashService = new BcryptHashService();
 
   const userRegisterUseCase = new UserRegisterUseCase(
     bcryptHashService,
-    userRepository,
+    mySqlUserRepository,
   );
   const userRegisterOutput = await userRegisterUseCase.exec(input);
 

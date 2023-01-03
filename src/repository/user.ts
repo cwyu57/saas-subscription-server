@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { UserEntity } from '../entity';
+import SaasSubscriptionModels from '../models';
 
 export interface UserRepositoryInterface {
   genUserId: () => Promise<string>;
@@ -34,5 +35,41 @@ export class InMemoryUserRepository implements UserRepositoryInterface {
   // eslint-disable-next-line class-methods-use-this
   async registerUser(userEntity: UserEntity): Promise<void> {
     InMemoryUserRepository.store[userEntity.id] = userEntity;
+  }
+}
+
+export class MySqlUserRepository implements UserRepositoryInterface {
+  store: SaasSubscriptionModels;
+
+  constructor(models: SaasSubscriptionModels) {
+    this.store = models;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  async genUserId(): Promise<string> {
+    return uuidv4();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  async isUserIdExist(id: string) {
+    const user = await this.store.User.findOne({
+      where: { id },
+    });
+    return !!user;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  async isEmailExist(email: string): Promise<boolean> {
+    const user = await this.store.User.findOne({
+      where: { email },
+    });
+    return !!user;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  async registerUser(userEntity: UserEntity): Promise<void> {
+    await this.store.User.create({
+      ...userEntity,
+    });
   }
 }
