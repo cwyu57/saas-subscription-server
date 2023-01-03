@@ -37,7 +37,9 @@ export class Config {
     }
     if (!env.DB_PASSWORD) {
       // database password is allowed to set to empty string
-      console.warn('missing environemnt variable DB_PASSWORD');
+      console.warn(
+        'environemnt variable DB_PASSWORD is empty, so database password is set to empty string',
+      );
     }
     if (!env.DB_DATABASE) {
       throw new Error('missing environemnt variable DB_DATABASE');
