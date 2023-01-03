@@ -1,5 +1,7 @@
+import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 import { v4 as uuidv4 } from 'uuid';
-import { UserEntity } from '../entity';
+import { errorCodes } from '../const';
+import { ResponseError, UserDto, UserEntity } from '../entity';
 import SaasSubscriptionModels from '../models';
 
 export interface UserRepositoryInterface {
@@ -7,6 +9,7 @@ export interface UserRepositoryInterface {
   isUserIdExist: (id: string) => Promise<boolean>;
   isEmailExist: (email: string) => Promise<boolean>;
   registerUser: (userEntity: UserEntity) => Promise<void>;
+  getUserDto: (id: string) => Promise<UserDto>;
 }
 
 export class InMemoryUserRepository implements UserRepositoryInterface {
@@ -35,6 +38,11 @@ export class InMemoryUserRepository implements UserRepositoryInterface {
   // eslint-disable-next-line class-methods-use-this
   async registerUser(userEntity: UserEntity): Promise<void> {
     InMemoryUserRepository.store[userEntity.id] = userEntity;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  async getUserDto(id: string): Promise<UserDto> {
+    return new UserEntity(InMemoryUserRepository.store[id]).toDto();
   }
 }
 
@@ -71,5 +79,20 @@ export class MySqlUserRepository implements UserRepositoryInterface {
     await this.store.User.create({
       ...userEntity,
     });
+  }
+
+  async getUserDto(id: string): Promise<UserDto> {
+    const user = await this.store.User.findOne({
+      where: { id },
+    });
+    if (!user) {
+      throw new ResponseError(
+        errorCodes.USER_NOT_EXIST,
+        StatusCodes.NOT_FOUND,
+        ReasonPhrases.NOT_FOUND,
+      );
+    }
+
+    return new UserEntity(user).toDto();
   }
 }
