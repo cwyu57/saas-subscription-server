@@ -1,4 +1,4 @@
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import { UserEntity } from '../entity';
 
 export interface UserRepositoryInterface {
@@ -16,7 +16,7 @@ export class InMemoryUserRepository implements UserRepositoryInterface {
     // const id = InMemoryUserRepository.autoIncrement;
     // InMemoryUserRepository.autoIncrement += 1;
     // return id;
-    return uuid();
+    return uuidv4();
   }
 
   // eslint-disable-next-line class-methods-use-this
