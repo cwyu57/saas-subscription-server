@@ -6,13 +6,11 @@ export class BcryptHashService implements HashServiceInterface {
 
   // eslint-disable-next-line class-methods-use-this
   hash(password: string): Promise<string> {
-    // return bcrypt.hash(password, BcryptHashService.SAULT_ROUNDS);
-    return Promise.resolve('asdfasdf');
+    return bcrypt.hash(password, BcryptHashService.SAULT_ROUNDS);
   }
 
   // eslint-disable-next-line class-methods-use-this
   compare(password: string, hash: string): Promise<boolean> {
-    // return bcrypt.compare(password, hash);
-    return Promise.resolve(true);
+    return bcrypt.compare(password, hash);
   }
 }
