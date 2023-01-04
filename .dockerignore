@@ -1,0 +1,40 @@
+# env
+.env
+.env.local
+.env.*.local
+
+# node
+dist
+node_modules
+__tests__
+coverage
+jest.config.ts
+nodemon.json
+
+# vscode
+.vscode
+
+# git
+.git
+.gitattributes
+.gitignore
+*.orig
+
+# docker
+.dockerignore
+Dockerfile*
+docker-compose.yml
+
+# misc
+.editorconfig
+.eslintrc
+.prettierignore
+.prettierrc
+.sequelizerc
+README.md
+
+# mac
+.DS_Store
+
+# project custom
+local

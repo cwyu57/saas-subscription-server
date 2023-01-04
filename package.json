@@ -6,8 +6,11 @@
   "scripts": {
     "build": "rm -rf dist && npx tsc",
     "dev": "nodemon --config nodemon.json --exec NODE_ENV=development ts-node -r dotenv-flow/config src/server.ts",
+    "docker-build-dev": "docker build -t saas-subscription-server .",
+    "docker-run-dev": "docker run --rm --env NODE_ENV=development --env DB_HOST=host.docker.internal --env-file=.env.development.local -v $PWD/local:/usr/src/app/local -p 8080:8080 saas-subscription-server",
     "format": "prettier --write .",
     "lint": "eslint --fix 'src/**/*.ts'",
+    "start": "node -r dotenv-flow/config dist/server.js",
     "test": "NODE_ENV=jest jest --testTimeout=30000 --detectOpenHandles"
   },
   "author": "",
@@ -21,7 +24,6 @@
     "@types/uuid": "^9.0.0",
     "@types/yamljs": "^0.2.31",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
-    "dotenv-flow": "^3.2.0",
     "dotenv-flow-cli": "^1.0.0",
     "eslint": "^8.30.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -39,6 +41,7 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "dotenv-flow": "^3.2.0",
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
     "express-basic-auth": "^1.2.1",
