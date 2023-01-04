@@ -11,8 +11,7 @@
     "format": "prettier --write .",
     "lint": "eslint --fix 'src/**/*.ts'",
     "start": "node -r dotenv-flow/config dist/server.js",
-    "test": "NODE_ENV=jest jest --testTimeout=30000 --detectOpenHandles",
-    "test:docker-compose": "docker-compose build && NODE_ENV=jest DB_HOST=mysql npx --no-install dotenv-flow -- docker-compose run saas-subscription-server npm run test && docker-compose down"
+    "test": "NODE_ENV=jest jest --testTimeout=30000 --detectOpenHandles"
   },
   "author": "",
   "license": "ISC",
