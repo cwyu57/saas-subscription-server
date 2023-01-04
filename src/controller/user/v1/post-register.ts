@@ -1,8 +1,8 @@
 import express from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { UserRegisterInput } from '../../../entity';
+import { UserRegisterInput } from '../../../ddd/domain/entity';
 import { bcryptHashService, mySqlUserRepository } from '../../../container';
-import { UserRegisterUseCase } from '../../../usecase';
+import { UserRegisterUseCase } from '../../../ddd/application/usecase';
 
 export const v1PostRegister: express.Handler = async (req, res) => {
   const input: UserRegisterInput = {

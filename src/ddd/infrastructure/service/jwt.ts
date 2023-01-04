@@ -1,9 +1,13 @@
 import * as jwt from 'jsonwebtoken';
 import { StatusCodes, ReasonPhrases } from 'http-status-codes';
 
-import { privateKey, publicKey } from '../loader';
-import { ResponseError } from '../entity';
-import { A_DAY_IN_SECONDS, errorCodes, SEVEN_DAYS_IN_SECONDS } from '../const';
+import { privateKey, publicKey } from '../../../loader';
+import { ResponseError } from '../../domain/entity';
+import {
+  A_DAY_IN_SECONDS,
+  errorCodes,
+  SEVEN_DAYS_IN_SECONDS,
+} from '../../../const';
 
 export class JwtService {
   static generateAccessToken(data: object): string {

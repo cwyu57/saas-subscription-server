@@ -1,6 +1,6 @@
 import express from 'express';
 import { StatusCodes, ReasonPhrases } from 'http-status-codes';
-import { ResponseError } from '../entity';
+import { ResponseError } from '../ddd/domain/entity';
 
 export const errorHandler: express.ErrorRequestHandler = (
   err,

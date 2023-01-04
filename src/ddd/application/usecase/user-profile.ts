@@ -1,5 +1,5 @@
-import { UserDto } from '../entity';
-import { UserRepositoryInterface } from '../repository/user';
+import { UserDto } from '../../domain/entity';
+import { UserRepositoryInterface } from '../../domain/repository/user';
 
 export class UserProfileUseCase {
   userRepository: UserRepositoryInterface;

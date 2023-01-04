@@ -1,14 +1,14 @@
 import { StatusCodes, ReasonPhrases } from 'http-status-codes';
-import { errorCodes } from '../const';
+import { errorCodes } from '../../../const';
 import {
   ResponseError,
   UserEntity,
   UserRegisterInput,
   UserRegisterOutput,
-} from '../entity';
-import { UserRepositoryInterface } from '../repository/user';
-import { HashServiceInterface } from '../service/hash';
-import { JwtService } from '../service/jwt';
+} from '../../domain/entity';
+import { UserRepositoryInterface } from '../../domain/repository/user';
+import { HashServiceInterface } from '../../domain/service/hash';
+import { JwtService } from '../../infrastructure/service/jwt';
 
 export class UserRegisterUseCase {
   hashService: HashServiceInterface;

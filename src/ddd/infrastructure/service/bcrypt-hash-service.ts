@@ -1,9 +1,5 @@
 import bcrypt from 'bcrypt';
-
-export interface HashServiceInterface {
-  hash(password: string): Promise<string>;
-  compare(password: string, hash: string): Promise<boolean>;
-}
+import { HashServiceInterface } from '../../domain/service/hash';
 
 export class BcryptHashService implements HashServiceInterface {
   static SAULT_ROUNDS = 10;

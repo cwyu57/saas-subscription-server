@@ -2,8 +2,8 @@ import express from 'express';
 import { StatusCodes, ReasonPhrases } from 'http-status-codes';
 import { config } from '../config';
 import { errorCodes } from '../const';
-import { ResponseError } from '../entity';
-import { JwtService } from '../service/jwt';
+import { ResponseError } from '../ddd/domain/entity';
+import { JwtService } from '../ddd/infrastructure/service/jwt';
 
 export const isAuthenticated: express.Handler = async (req, res, next) => {
   if (!req.headers.authorization) {

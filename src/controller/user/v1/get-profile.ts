@@ -1,7 +1,7 @@
 import express from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { mySqlUserRepository } from '../../../container';
-import { UserProfileUseCase } from '../../../usecase';
+import { UserProfileUseCase } from '../../../ddd/application/usecase';
 
 export const v1GetProfile: express.Handler = async (req, res) => {
   const userId = (req as any).user?.id;
