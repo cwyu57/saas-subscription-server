@@ -4,7 +4,8 @@ import { ModelsInterface } from '.';
 // These are all the attributes in the Service model
 export interface ServiceAttributes {
   id: number;
-  name: string;
+  code: string;
+  display: string;
 }
 
 // Some attributes are optional in `Service.build` and `Service.create` calls
@@ -16,7 +17,9 @@ export class Service
 {
   public id!: number; // Note that the `null assertion` `!` is required in strict mode.
 
-  public name!: string;
+  public code!: string;
+
+  public display!: string;
 
   // timestamps!
   public readonly createdAt!: Date;
@@ -31,7 +34,11 @@ export class Service
           primaryKey: true,
           autoIncrement: true,
         },
-        name: {
+        code: {
+          type: DataTypes.STRING(255),
+          allowNull: false,
+        },
+        display: {
           type: DataTypes.STRING(255),
           allowNull: false,
         },
@@ -50,8 +57,8 @@ export class Service
     Service.belongsToMany(models.Plan, {
       through: { model: models.ServiceIncluded },
       foreignKey: {
-        field: 'plan_id',
-        name: 'planId',
+        field: 'service_id',
+        name: 'serviceId',
       },
       as: 'plans',
       constraints: false,

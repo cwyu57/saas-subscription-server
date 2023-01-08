@@ -308,7 +308,7 @@ paths:
           $ref: '#/components/responses/200-get-user-profile'
 
   /catalog/v1/plans:
-    post:
+    get:
       tags:
         - catalog
       operationId: /catalog/v1/plans

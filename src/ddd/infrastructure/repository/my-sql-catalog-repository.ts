@@ -10,7 +10,14 @@ export class MySqlCatalogRepository implements CatalogRepositoryInterface {
   }
 
   async getPlans(): Promise<PlanEntity[]> {
-    const plans = await this.store.Plan.findAll();
+    const plans = await this.store.Plan.findAll({
+      include: [
+        {
+          model: this.store.Service,
+          as: 'services',
+        },
+      ],
+    });
     return plans.map(e => new PlanEntity(e));
   }
 }

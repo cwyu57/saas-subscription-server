@@ -4,6 +4,8 @@ import { ModelsInterface } from '.';
 // These are all the attributes in the Service model
 export interface ServiceIncludedAttributes {
   id: number;
+  planId: number | null;
+  serviceId: number | null;
 }
 
 // Some attributes are optional in `Service.build` and `Service.create` calls
@@ -17,6 +19,10 @@ export class ServiceIncluded
 
   public name!: string;
 
+  public planId!: number | null;
+
+  public serviceId!: number | null;
+
   // timestamps!
   public readonly createdAt!: Date;
 
@@ -29,6 +35,12 @@ export class ServiceIncluded
           type: DataTypes.INTEGER.UNSIGNED,
           primaryKey: true,
           autoIncrement: true,
+        },
+        planId: {
+          type: DataTypes.INTEGER.UNSIGNED,
+        },
+        serviceId: {
+          type: DataTypes.INTEGER.UNSIGNED,
         },
       },
       {

@@ -6,6 +6,7 @@ import { ServiceAttributes } from './service';
 export interface PlanAttributes {
   id: number;
   name: string;
+  price: number;
   isActive: boolean;
 
   services?: ServiceAttributes[] | undefined;
@@ -21,6 +22,8 @@ export class Plan
   public id!: number; // Note that the `null assertion` `!` is required in strict mode.
 
   public name!: string;
+
+  public price!: number;
 
   public isActive!: boolean;
 
@@ -39,6 +42,10 @@ export class Plan
         },
         name: {
           type: DataTypes.STRING,
+          allowNull: false,
+        },
+        price: {
+          type: DataTypes.DECIMAL(8, 2),
           allowNull: false,
         },
         isActive: {
@@ -60,8 +67,8 @@ export class Plan
     Plan.belongsToMany(models.Service, {
       through: { model: models.ServiceIncluded },
       foreignKey: {
-        field: 'user_id',
-        name: 'userId',
+        field: 'plan_id',
+        name: 'planId',
       },
       as: 'services',
       constraints: false,

@@ -7,6 +7,10 @@ import {
   userRouter,
 } from './routes';
 
+// import { saasSubscriptionModels } from './container';
+
+// saasSubscriptionModels.sync({ force: true }, () => {});
+
 const app = express();
 
 app.use(express.json());
