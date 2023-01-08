@@ -11,7 +11,8 @@
     "format": "prettier --write .",
     "lint": "eslint --fix 'src/**/*.ts'",
     "start": "node -r dotenv-flow/config dist/server.js",
-    "test": "NODE_ENV=jest jest --testTimeout=30000 --detectOpenHandles"
+    "test": "NODE_ENV=jest jest --testTimeout=30000 --detectOpenHandles",
+    "seed:all": "npm run build && npx --no-install dotenv-flow sequelize db:seed:all"
   },
   "author": "",
   "license": "ISC",
