@@ -2,17 +2,16 @@ import { Sequelize, Model, DataTypes, ModelCtor } from 'sequelize';
 import { ModelsInterface } from '.';
 
 // These are all the attributes in the Service model
-export interface ServiceAttributes {
+export interface SubscriptionAttributes {
   id: number;
-  name: string;
 }
 
 // Some attributes are optional in `Service.build` and `Service.create` calls
-export interface ServiceCreationAttributes {}
+export interface SubscriptionCreationAttributes {}
 
-export class Service
-  extends Model<ServiceAttributes, ServiceCreationAttributes>
-  implements ServiceAttributes
+export class Subscription
+  extends Model<SubscriptionAttributes, SubscriptionCreationAttributes>
+  implements SubscriptionAttributes
 {
   public id!: number; // Note that the `null assertion` `!` is required in strict mode.
 
@@ -23,37 +22,29 @@ export class Service
 
   public readonly updatedAt!: Date;
 
-  static factory(sequelize: Sequelize): ModelCtor<Service> {
-    Service.init(
+  static factory(sequelize: Sequelize): ModelCtor<Subscription> {
+    Subscription.init(
       {
         id: {
           type: DataTypes.INTEGER.UNSIGNED,
           primaryKey: true,
           autoIncrement: true,
         },
-        name: {
-          type: DataTypes.STRING(255),
-          allowNull: false,
-        },
       },
       {
-        tableName: 'services',
+        tableName: 'subscriptions',
         sequelize, // passing the `sequelize` instance is required
         underscored: true,
         paranoid: true,
       },
     );
-    return Service as ModelCtor<Service>;
+    return Subscription as ModelCtor<Subscription>;
   }
 
   static associate(models: ModelsInterface): void {
-    Service.belongsToMany(models.Plan, {
-      through: { model: models.ServiceIncluded },
-      foreignKey: {
-        field: 'plan_id',
-        name: 'planId',
-      },
-      as: 'plans',
+    Subscription.belongsTo(models.User, {
+      foreignKey: 'user_id',
+      as: 'user',
       constraints: false,
     });
   }

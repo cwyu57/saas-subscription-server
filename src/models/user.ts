@@ -60,5 +60,11 @@ export class User
     return User as ModelCtor<User>;
   }
 
-  static associate(models: ModelsInterface): void {}
+  static associate(models: ModelsInterface): void {
+    User.hasMany(models.Subscription, {
+      foreignKey: 'user_id',
+      as: 'subscriptions',
+      constraints: false,
+    });
+  }
 }

@@ -53,5 +53,15 @@ export class Plan
     return Plan as ModelCtor<Plan>;
   }
 
-  static associate(models: ModelsInterface): void {}
+  static associate(models: ModelsInterface): void {
+    Plan.belongsToMany(models.Service, {
+      through: { model: models.ServiceIncluded },
+      foreignKey: {
+        field: 'user_id',
+        name: 'userId',
+      },
+      as: 'services',
+      constraints: false,
+    });
+  }
 }
