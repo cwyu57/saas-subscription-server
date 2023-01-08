@@ -10,8 +10,9 @@ info:
 
 tags:
   - name: user
-  - name: swagger
+  - name: catalog
   - name: system
+  - name: swagger
 
 components:
   schemas:
@@ -111,6 +112,14 @@ components:
                         type: string
                       email:
                         type: string
+    200-get-plans:
+      description: OK
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: object
 
     200-get-system-v1-config:
       description: OK
@@ -297,6 +306,16 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/200-get-user-profile'
+
+  /catalog/v1/plans:
+    post:
+      tags:
+        - catalog
+      operationId: /catalog/v1/plans
+      description: 取得所有方案
+      responses:
+        200:
+          $ref: '#/components/responses/200-get-plans'
 
   /swagger/api-docs:
     get:

@@ -1,11 +1,14 @@
 import { Sequelize, Model, DataTypes, ModelCtor } from 'sequelize';
 import { ModelsInterface } from '.';
+import { ServiceAttributes } from './service';
 
 // These are all the attributes in the Plan model
 export interface PlanAttributes {
   id: number;
   name: string;
   isActive: boolean;
+
+  services?: ServiceAttributes[] | undefined;
 }
 
 // Some attributes are optional in `Plan.build` and `Plan.create` calls
