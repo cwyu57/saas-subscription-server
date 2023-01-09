@@ -87,21 +87,26 @@ components:
               planId:
                 description: planId
                 type: number
+                example: 1
               prime:
                 description: tappay prime
                 type: string
+                example: test_3a2fb2b7e892b914a03c95dd4dd5dc7970c908df67a49527c0a648b2bc9
               cardholder:
                 type: object
                 properties:
                   name:
                     description: cardholder name
                     type: string
+                    example: cwyu57
                   email:
                     description: cardholder email
                     type: string
+                    example: cwyu57@gmail.com
                   phone_number:
                     description: cardholder phone number
                     type: string
+                    example: 0912345678
             required:
               - planId
               - prime
