@@ -11,6 +11,7 @@ info:
 tags:
   - name: user
   - name: catalog
+  - name: payment
   - name: system
   - name: swagger
 
@@ -71,6 +72,31 @@ components:
             required:
               - email
               - name
+    subscribe-plan:
+      content:
+        application/json:
+          schema:
+            properties:
+              planId:
+                description: planId
+                type: number
+              prime:
+                description: tappay prime
+                type: string
+            required:
+              - planId
+              - prime
+
+    suspend-plan:
+      content:
+        application/json:
+          schema:
+            properties:
+              subscriptionId:
+                description: subscriptionId
+                type: number
+            required:
+              - subscriptionId
   responses:
     200-post-user-register:
       description: OK
@@ -113,6 +139,24 @@ components:
                       email:
                         type: string
     200-get-plans:
+      description: OK
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: object
+
+    200-subscribe-plan:
+      description: OK
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: object
+
+    200-suspend-plan:
       description: OK
       content:
         application/json:
@@ -316,6 +360,34 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/200-get-plans'
+
+  /payment/v1/subscribe-plan:
+    get:
+      tags:
+        - payment
+      operationId: /payment/v1/subscribe-plan
+      description: 訂閱方案
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: '#/components/requestBodies/subscribe-plan'
+      responses:
+        200:
+          $ref: '#/components/responses/200-subscribe-plan'
+
+  /payment/v1/suspend-plan:
+    get:
+      tags:
+        - payment
+      operationId: /payment/v1/suspend-plan
+      description: 取消訂閱方案
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: '#/components/requestBodies/suspend-plan'
+      responses:
+        200:
+          $ref: '#/components/responses/200-suspend-plan'
 
   /swagger/api-docs:
     get:
