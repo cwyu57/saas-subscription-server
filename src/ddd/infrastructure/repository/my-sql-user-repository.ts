@@ -40,6 +40,33 @@ export class MySqlUserRepository implements UserRepositoryInterface {
     });
   }
 
+  async getUserByEmail(email: string): Promise<UserEntity> {
+    const user = await this.store.User.findOne({
+      include: [
+        {
+          model: this.store.Plan,
+          as: 'plans',
+          include: [
+            {
+              model: this.store.Service,
+              as: 'services',
+            },
+          ],
+        },
+      ],
+      where: { email },
+    });
+    if (!user) {
+      throw new ResponseError(
+        errorCodes.USER_NOT_EXIST,
+        StatusCodes.NOT_FOUND,
+        ReasonPhrases.NOT_FOUND,
+      );
+    }
+
+    return new UserEntity(user);
+  }
+
   async getUserById(id: string): Promise<UserEntity> {
     const user = await this.store.User.findOne({
       include: [

@@ -33,6 +33,11 @@ export class InMemoryUserRepository implements UserRepositoryInterface {
   }
 
   // eslint-disable-next-line class-methods-use-this
+  async getUserByEmail(email: string): Promise<UserEntity> {
+    throw new Error('not implement');
+  }
+
+  // eslint-disable-next-line class-methods-use-this
   async getUserById(id: string): Promise<UserEntity> {
     throw new Error('not implement');
   }

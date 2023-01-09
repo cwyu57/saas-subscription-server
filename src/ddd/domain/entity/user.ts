@@ -14,6 +14,8 @@ export type UserRegisterInput = {
   password: string;
 };
 
+export type UserLoginInput = Omit<UserRegisterInput, 'name'>;
+
 export type UserRegisterOutput = {
   user: UserDto;
   accessToken: string;
