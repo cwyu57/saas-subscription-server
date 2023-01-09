@@ -90,9 +90,22 @@ components:
               prime:
                 description: tappay prime
                 type: string
+              cardholder:
+                type: object
+                properties:
+                  name:
+                    description: cardholder name
+                    type: string
+                  email:
+                    description: cardholder email
+                    type: string
+                  phone_number:
+                    description: cardholder phone number
+                    type: string
             required:
               - planId
               - prime
+              - cardholder
 
     suspend-plan:
       content:
@@ -369,7 +382,7 @@ paths:
           $ref: '#/components/responses/200-get-plans'
 
   /payment/v1/subscribe-plan:
-    get:
+    post:
       tags:
         - payment
       operationId: /payment/v1/subscribe-plan
@@ -383,7 +396,7 @@ paths:
           $ref: '#/components/responses/200-subscribe-plan'
 
   /payment/v1/suspend-plan:
-    get:
+    post:
       tags:
         - payment
       operationId: /payment/v1/suspend-plan

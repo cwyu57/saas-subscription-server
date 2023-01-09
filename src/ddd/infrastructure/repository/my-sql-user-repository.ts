@@ -76,7 +76,28 @@ export class MySqlUserRepository implements UserRepositoryInterface {
   async getUserDto(id: string): Promise<UserDto> {
     const user = await this.store.User.findOne({
       where: { id },
+      include: [
+        {
+          model: this.store.Subscription,
+          as: 'subscriptions',
+          include: [
+            {
+              model: this.store.Plan,
+              as: 'plan',
+              include: [
+                {
+                  model: this.store.Service,
+                  as: 'services',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     });
+
+    console.log(JSON.stringify(user?.toJSON(), null, 2));
+
     if (!user) {
       throw new ResponseError(
         errorCodes.USER_NOT_EXIST,

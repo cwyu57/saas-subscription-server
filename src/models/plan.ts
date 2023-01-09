@@ -80,5 +80,13 @@ export class Plan
       as: 'services',
       constraints: false,
     });
+    Plan.hasMany(models.Subscription, {
+      foreignKey: {
+        field: 'plan_id',
+        name: 'planId',
+      },
+      as: 'subscriptions',
+      constraints: false,
+    });
   }
 }

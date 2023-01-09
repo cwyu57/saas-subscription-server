@@ -4,6 +4,7 @@ import {
   InMemoryUserRepository,
   MySqlUserRepository,
   MySqlCatalogRepository,
+  MySqlPaymentRepository,
 } from '../ddd/infrastructure/repository';
 import { BcryptHashService } from '../ddd/infrastructure/service';
 
@@ -16,5 +17,8 @@ export const mySqlUserRepository = new MySqlUserRepository(
   saasSubscriptionModels,
 );
 export const mySqlCatalogRepository = new MySqlCatalogRepository(
+  saasSubscriptionModels,
+);
+export const mySqlPaymentRepository = new MySqlPaymentRepository(
   saasSubscriptionModels,
 );

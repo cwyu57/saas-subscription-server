@@ -8,12 +8,15 @@ export class PlanEntity {
 
   isActive: boolean;
 
+  periodInDays: number;
+
   services?: ServiceEntity[];
 
   constructor(params: PlanAttributes) {
     this.id = params.id;
     this.name = params.name;
     this.isActive = params.isActive;
+    this.periodInDays = params.periodInDays;
     this.services = params.services?.map(e => new ServiceEntity(e));
   }
 }

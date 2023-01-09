@@ -5,11 +5,11 @@ export class ServiceEntity {
 
   code: string;
 
-  display: string;
+  name: string;
 
   constructor(params: ServiceAttributes) {
     this.id = params.id;
     this.code = params.code;
-    this.display = params.name;
+    this.name = params.name;
   }
 }
