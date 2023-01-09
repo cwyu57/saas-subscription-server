@@ -25,6 +25,12 @@ export class Config {
 
   systemApiKey: string;
 
+  tapPayBaseUrl: string;
+
+  tapPayMerchantId: string;
+
+  tapPayPartnerKey: string;
+
   constructor(env: { [key: string]: string | undefined }) {
     if (!env.NODE_ENV) {
       throw new Error('missing environemnt variable NODE_ENV');
@@ -68,6 +74,15 @@ export class Config {
     if (!env.SYSTEM_API_KEY) {
       throw new Error('missing environemnt variable SYSTEM_API_KEY');
     }
+    if (!env.TAP_PAY_BASE_URL) {
+      throw new Error('missing environemnt variable TAP_PAY_BASE_URL');
+    }
+    if (!env.TAP_PAY_MERCHANT_ID) {
+      throw new Error('missing environemnt variable TAP_PAY_MERCHANT_ID');
+    }
+    if (!env.TAP_PAY_PARTNER_KEY) {
+      throw new Error('missing environemnt variable TAP_PAY_PARTNER_KEY');
+    }
 
     this.environment = env.NODE_ENV;
     this.databaseHost = env.DB_HOST;
@@ -83,6 +98,10 @@ export class Config {
     this.swaggerUsername = env.SWAGGER_USERNAME;
     this.swaggerPassword = env.SWAGGER_PASSWORD;
     this.systemApiKey = env.SYSTEM_API_KEY;
+
+    this.tapPayBaseUrl = env.TAP_PAY_BASE_URL;
+    this.tapPayMerchantId = env.TAP_PAY_MERCHANT_ID;
+    this.tapPayPartnerKey = env.TAP_PAY_PARTNER_KEY;
   }
 }
 
