@@ -4,6 +4,7 @@ import { PlanAttributes, PlanEntity } from './plan';
 
 export interface SubscriptionAttributes {
   id: number;
+  status: string;
   validTo: number;
   planId: number;
   userId: string;
@@ -21,6 +22,8 @@ export interface SubscriptionCreationAttributes
 export class SubscriptionEntity implements SubscriptionAttributes {
   id: number;
 
+  status: string;
+
   validTo: number;
 
   planId: number;
@@ -37,6 +40,7 @@ export class SubscriptionEntity implements SubscriptionAttributes {
 
   constructor(params: SubscriptionAttributes) {
     this.id = params.id;
+    this.status = params.status;
     this.validTo = params.validTo;
     this.planId = params.planId;
     this.userId = params.userId;

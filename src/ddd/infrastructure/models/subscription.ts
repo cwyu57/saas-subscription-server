@@ -16,6 +16,8 @@ export class Subscription
 {
   public id!: number; // Note that the `null assertion` `!` is required in strict mode.
 
+  public status!: string; // Note that the `null assertion` `!` is required in strict mode.
+
   public validTo!: number; // Note that the `null assertion` `!` is required in strict mode.
 
   public planId!: number; // Note that the `null assertion` `!` is required in strict mode.
@@ -40,6 +42,12 @@ export class Subscription
           type: DataTypes.INTEGER.UNSIGNED,
           primaryKey: true,
           autoIncrement: true,
+        },
+        status: {
+          type: DataTypes.ENUM,
+          values: ['valid', 'suspend', 'invalid'],
+          defaultValue: 'invalid',
+          allowNull: false,
         },
         validTo: {
           type: DataTypes.BIGINT({ length: 13 }),

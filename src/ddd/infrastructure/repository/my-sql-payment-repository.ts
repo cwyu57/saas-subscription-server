@@ -1,4 +1,6 @@
+import Sequelize from 'sequelize';
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
+import { sequelize } from '../../../loader';
 import { ResponseError, SubscriptionEntity } from '../../domain/entity';
 import { PaymentRepositoryInterface } from '../../domain/repository';
 import SaasSubscriptionModels from '../models';
@@ -47,6 +49,7 @@ export class MySqlPaymentRepository implements PaymentRepositoryInterface {
       const subscription = await this.store.Subscription.create(
         {
           validTo: Date.now() + plan.periodInDays * 86400 * 1000,
+          status: 'valid',
           planId: plan.id,
           userId,
           paymentInfoId: paymentInfo.id,
@@ -68,6 +71,9 @@ export class MySqlPaymentRepository implements PaymentRepositoryInterface {
     const subscriptions = await this.store.Subscription.findAll({
       where: {
         userId,
+        status: {
+          [Sequelize.Op.in]: ['valid', 'suspend'],
+        },
       },
       include: [
         {
