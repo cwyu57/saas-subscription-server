@@ -1,10 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
 import {} from '../../../const';
+import { UserAttributes } from '../../../models/user';
 import { UserDto, UserEntity } from '../../domain/entity';
 import { UserRepositoryInterface } from '../../domain/repository';
 
 export class InMemoryUserRepository implements UserRepositoryInterface {
-  static store: { [key: string]: UserEntity } = {};
+  static store: { [key: string]: UserAttributes } = {};
 
   // eslint-disable-next-line class-methods-use-this
   async genUserId(): Promise<string> {

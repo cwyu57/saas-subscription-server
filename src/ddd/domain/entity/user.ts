@@ -1,7 +1,11 @@
+import { PlanAttributes } from '../../../models/plan';
+import { PlanEntity } from './plan';
+
 export type UserDto = {
   id: string;
   name: string;
   email: string;
+  plans: PlanEntity[];
 };
 
 export type UserRegisterInput = {
@@ -25,11 +29,16 @@ export class UserEntity {
 
   password: string;
 
-  constructor(params: UserRegisterInput & { id: string }) {
+  plans: PlanEntity[];
+
+  constructor(
+    params: UserRegisterInput & { id: string } & { plans?: PlanAttributes[] },
+  ) {
     this.id = params.id;
     this.name = params.name;
     this.email = params.email;
     this.password = params.password;
+    this.plans = params.plans?.map(e => new PlanEntity(e)) || [];
   }
 
   toDto(): UserDto {
@@ -37,6 +46,7 @@ export class UserEntity {
       id: this.id,
       name: this.name,
       email: this.email,
+      plans: this.plans,
     };
   }
 }

@@ -88,5 +88,14 @@ export class Plan
       as: 'subscriptions',
       constraints: false,
     });
+    Plan.belongsToMany(models.User, {
+      through: { model: models.Subscription },
+      foreignKey: {
+        field: 'plan_id',
+        name: 'planId',
+      },
+      as: 'users',
+      constraints: false,
+    });
   }
 }

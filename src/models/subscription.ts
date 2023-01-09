@@ -58,16 +58,16 @@ export class Subscription
   }
 
   static associate(models: ModelsInterface): void {
-    Subscription.belongsTo(models.User, {
-      foreignKey: 'user_id',
-      as: 'user',
-      constraints: false,
-    });
-    Subscription.belongsTo(models.Plan, {
-      foreignKey: 'plan_id',
-      as: 'plan',
-      constraints: false,
-    });
+    // Subscription.belongsTo(models.User, {
+    //   foreignKey: 'user_id',
+    //   as: 'user',
+    //   constraints: false,
+    // });
+    // Subscription.belongsTo(models.Plan, {
+    //   foreignKey: 'plan_id',
+    //   as: 'plan',
+    //   constraints: false,
+    // });
     Subscription.belongsTo(models.PaymentInfo, {
       foreignKey: 'payment_info_id',
       as: 'paymentInfo',

@@ -44,18 +44,12 @@ export class MySqlUserRepository implements UserRepositoryInterface {
     const user = await this.store.User.findOne({
       include: [
         {
-          model: this.store.Subscription,
-          as: 'subscriptions',
+          model: this.store.Plan,
+          as: 'plans',
           include: [
             {
-              model: this.store.Plan,
-              as: 'plans',
-              include: [
-                {
-                  model: this.store.Service,
-                  as: 'services',
-                },
-              ],
+              model: this.store.Service,
+              as: 'services',
             },
           ],
         },
@@ -78,18 +72,12 @@ export class MySqlUserRepository implements UserRepositoryInterface {
       where: { id },
       include: [
         {
-          model: this.store.Subscription,
-          as: 'subscriptions',
+          model: this.store.Plan,
+          as: 'plans',
           include: [
             {
-              model: this.store.Plan,
-              as: 'plan',
-              include: [
-                {
-                  model: this.store.Service,
-                  as: 'services',
-                },
-              ],
+              model: this.store.Service,
+              as: 'services',
             },
           ],
         },
