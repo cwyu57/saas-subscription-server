@@ -79,6 +79,22 @@ components:
               - email
               - name
               - password
+    user-login:
+      content:
+        application/json:
+          schema:
+            properties:
+              email:
+                description: email
+                type: string
+                example: cwyu57@gmail.com
+              password:
+                description: 密碼
+                type: string
+                example: test-password
+            required:
+              - email
+              - password
     subscribe-plan:
       content:
         application/json:
@@ -123,7 +139,7 @@ components:
             required:
               - subscriptionId
   responses:
-    200-post-user-register:
+    200-post-user-register-login:
       description: OK
       content:
         application/json:
@@ -362,7 +378,19 @@ paths:
         $ref: '#/components/requestBodies/user-register'
       responses:
         200:
-          $ref: '#/components/responses/200-post-user-register'
+          $ref: '#/components/responses/200-post-user-register-login'
+
+  /user/v1/login:
+    post:
+      tags:
+        - user
+      operationId: /user/v1/login
+      description: 使用者註冊
+      requestBody:
+        $ref: '#/components/requestBodies/user-login'
+      responses:
+        200:
+          $ref: '#/components/responses/200-post-user-register-login'
 
   /user/v1/profile:
     get:
