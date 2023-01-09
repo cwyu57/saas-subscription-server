@@ -66,12 +66,19 @@ components:
               email:
                 description: email
                 type: string
+                example: cwyu57@gmail.com
+              password:
+                description: 密碼
+                type: string
+                example: test-password
               name:
                 description: 名稱
                 type: string
+                example: cwyu57
             required:
               - email
               - name
+              - password
     subscribe-plan:
       content:
         application/json:
