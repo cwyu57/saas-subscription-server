@@ -1,16 +1,6 @@
 import { Sequelize, Model, DataTypes, ModelCtor } from 'sequelize';
 import { ModelsInterface } from '.';
-
-// These are all the attributes in the User model
-export interface UserAttributes {
-  id: string;
-  email: string;
-  name: string;
-  password: string;
-}
-
-// Some attributes are optional in `User.build` and `User.create` calls
-export interface UserCreationAttributes {}
+import { UserAttributes, UserCreationAttributes } from '../ddd/domain/entity';
 
 export class User
   extends Model<UserAttributes, UserCreationAttributes>

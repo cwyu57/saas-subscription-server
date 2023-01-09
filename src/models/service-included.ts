@@ -1,15 +1,11 @@
 import { Sequelize, Model, DataTypes, ModelCtor } from 'sequelize';
 import { ModelsInterface } from '.';
+import {
+  ServiceIncludedAttributes,
+  ServiceIncludedCreationAttributes,
+} from '../ddd/domain/entity';
 
 // These are all the attributes in the Service model
-export interface ServiceIncludedAttributes {
-  id: number;
-  planId: number | null;
-  serviceId: number | null;
-}
-
-// Some attributes are optional in `Service.build` and `Service.create` calls
-export interface ServiceIncludedCreationAttributes {}
 
 export class ServiceIncluded
   extends Model<ServiceIncludedAttributes, ServiceIncludedCreationAttributes>

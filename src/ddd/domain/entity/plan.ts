@@ -1,6 +1,17 @@
-import { PlanAttributes } from '../../../models/plan';
-import { ServiceEntity } from './service';
+import { ServiceAttributes, ServiceEntity } from './service';
 
+export interface PlanAttributes {
+  id: number;
+  name: string;
+  price: number;
+  isActive: boolean;
+  periodInDays: number;
+
+  services?: ServiceAttributes[] | undefined;
+}
+
+// Some attributes are optional in `Plan.build` and `Plan.create` calls
+export interface PlanCreationAttributes extends Omit<PlanAttributes, 'id'> {}
 export class PlanEntity {
   id: number;
 

@@ -1,7 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import {} from '../../../const';
-import { UserAttributes } from '../../../models/user';
-import { UserDto, UserEntity } from '../../domain/entity';
+import { UserAttributes, UserDto, UserEntity } from '../../domain/entity';
 import { UserRepositoryInterface } from '../../domain/repository';
 
 export class InMemoryUserRepository implements UserRepositoryInterface {

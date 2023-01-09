@@ -1,7 +1,3 @@
-import { ReasonPhrases, StatusCodes } from 'http-status-codes';
-import { v4 as uuidv4 } from 'uuid';
-import { errorCodes } from '../../../const';
-import { ResponseError, UserDto, UserEntity } from '../../domain/entity';
 import { PaymentRepositoryInterface } from '../../domain/repository';
 import SaasSubscriptionModels from '../../../models';
 import { PayByPrimeResponse, PayByPrimeInput } from '../service';

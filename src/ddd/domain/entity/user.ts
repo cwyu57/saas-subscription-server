@@ -1,5 +1,15 @@
-import { PlanAttributes } from '../../../models/plan';
-import { PlanEntity } from './plan';
+// import { PlanAttributes } from '../../../models/plan';
+import { PlanAttributes, PlanEntity } from './plan';
+
+export interface UserAttributes {
+  id: string;
+  email: string;
+  name: string;
+  password: string;
+}
+
+// Some attributes are optional in `User.build` and `User.create` calls
+export interface UserCreationAttributes extends Omit<UserAttributes, 'id'> {}
 
 export type UserDto = {
   id: string;

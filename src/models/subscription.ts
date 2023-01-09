@@ -1,16 +1,11 @@
 import { Sequelize, Model, DataTypes, ModelCtor } from 'sequelize';
 import { ModelsInterface } from '.';
+import {
+  SubscriptionAttributes,
+  SubscriptionCreationAttributes,
+} from '../ddd/domain/entity';
 
 // These are all the attributes in the Service model
-export interface SubscriptionAttributes {
-  id: number;
-  validTo: number;
-  planId: number;
-  userId: string;
-}
-
-// Some attributes are optional in `Service.build` and `Service.create` calls
-export interface SubscriptionCreationAttributes {}
 
 export class Subscription
   extends Model<SubscriptionAttributes, SubscriptionCreationAttributes>

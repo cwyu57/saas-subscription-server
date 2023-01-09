@@ -1,20 +1,6 @@
 import { Sequelize, Model, DataTypes, ModelCtor } from 'sequelize';
 import { ModelsInterface } from '.';
-import { ServiceAttributes } from './service';
-
-// These are all the attributes in the Plan model
-export interface PlanAttributes {
-  id: number;
-  name: string;
-  price: number;
-  isActive: boolean;
-  periodInDays: number;
-
-  services?: ServiceAttributes[] | undefined;
-}
-
-// Some attributes are optional in `Plan.build` and `Plan.create` calls
-export interface PlanCreationAttributes {}
+import { PlanAttributes, PlanCreationAttributes } from '../ddd/domain/entity';
 
 export class Plan
   extends Model<PlanAttributes, PlanCreationAttributes>

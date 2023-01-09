@@ -1,23 +1,11 @@
-import { Sequelize, Model, DataTypes, ModelCtor, Optional } from 'sequelize';
+import { Sequelize, Model, DataTypes, ModelCtor } from 'sequelize';
 import { ModelsInterface } from '.';
+import {
+  PaymentInfoAttributes,
+  PaymentInfoCreationAttributes,
+} from '../ddd/domain/entity';
 
 // These are all the attributes in the Service model
-export interface PaymentInfoAttributes {
-  id: number;
-  cardKey: string;
-  cardToken: string;
-  firstSix: string;
-  lastFour: string;
-  cardHolderName: string;
-  cardHolderEmail: string;
-  cardHolderPhone: string;
-}
-
-// Some attributes are optional in `Service.build` and `Service.create` calls
-export type PaymentInfoCreationAttributes = Optional<
-  PaymentInfoAttributes,
-  'id'
->;
 
 export class PaymentInfo
   extends Model<PaymentInfoAttributes, PaymentInfoCreationAttributes>
