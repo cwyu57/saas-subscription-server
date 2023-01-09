@@ -32,6 +32,11 @@ export class InMemoryUserRepository implements UserRepositoryInterface {
   }
 
   // eslint-disable-next-line class-methods-use-this
+  async getUserById(id: string): Promise<UserEntity> {
+    throw new Error('not implement');
+  }
+
+  // eslint-disable-next-line class-methods-use-this
   async getUserDto(id: string): Promise<UserDto> {
     return new UserEntity(InMemoryUserRepository.store[id]).toDto();
   }

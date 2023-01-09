@@ -28,36 +28,6 @@ export default {
           plan_id: 2,
           service_id: 3,
         },
-        {
-          id: 58,
-          plan_id: 3,
-          service_id: 1,
-        },
-        {
-          id: 6,
-          plan_id: 3,
-          service_id: 2,
-        },
-        {
-          id: 7,
-          plan_id: 3,
-          service_id: 3,
-        },
-        {
-          id: 8,
-          plan_id: 4,
-          service_id: 1,
-        },
-        {
-          id: 9,
-          plan_id: 4,
-          service_id: 2,
-        },
-        {
-          id: 10,
-          plan_id: 4,
-          service_id: 3,
-        },
       ].map(e => ({
         ...e,
         created_at: new Date(),

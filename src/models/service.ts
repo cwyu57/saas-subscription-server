@@ -5,7 +5,7 @@ import { ModelsInterface } from '.';
 export interface ServiceAttributes {
   id: number;
   code: string;
-  display: string;
+  name: string;
 }
 
 // Some attributes are optional in `Service.build` and `Service.create` calls
@@ -19,7 +19,7 @@ export class Service
 
   public code!: string;
 
-  public display!: string;
+  public name!: string;
 
   // timestamps!
   public readonly createdAt!: Date;
@@ -38,7 +38,7 @@ export class Service
           type: DataTypes.STRING(255),
           allowNull: false,
         },
-        display: {
+        name: {
           type: DataTypes.STRING(255),
           allowNull: false,
         },

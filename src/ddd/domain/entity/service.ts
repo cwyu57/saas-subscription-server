@@ -10,6 +10,6 @@ export class ServiceEntity {
   constructor(params: ServiceAttributes) {
     this.id = params.id;
     this.code = params.code;
-    this.display = params.display;
+    this.display = params.name;
   }
 }

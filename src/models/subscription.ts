@@ -4,6 +4,9 @@ import { ModelsInterface } from '.';
 // These are all the attributes in the Service model
 export interface SubscriptionAttributes {
   id: number;
+  validTo: number;
+  planId: number;
+  userId: string;
 }
 
 // Some attributes are optional in `Service.build` and `Service.create` calls
@@ -15,7 +18,11 @@ export class Subscription
 {
   public id!: number; // Note that the `null assertion` `!` is required in strict mode.
 
-  public name!: string;
+  public validTo!: number; // Note that the `null assertion` `!` is required in strict mode.
+
+  public planId!: number; // Note that the `null assertion` `!` is required in strict mode.
+
+  public userId!: string; // Note that the `null assertion` `!` is required in strict mode.
 
   // timestamps!
   public readonly createdAt!: Date;
@@ -29,6 +36,15 @@ export class Subscription
           type: DataTypes.INTEGER.UNSIGNED,
           primaryKey: true,
           autoIncrement: true,
+        },
+        validTo: {
+          type: DataTypes.INTEGER({ length: 13 }),
+        },
+        planId: {
+          type: DataTypes.INTEGER.UNSIGNED,
+        },
+        userId: {
+          type: DataTypes.UUID,
         },
       },
       {

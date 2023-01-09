@@ -10,27 +10,17 @@ export default {
       [
         {
           id: 1,
-          name: 'OTT Basic',
-          price: 0,
+          name: 'OTT Advanced (monthly plan)',
+          price: 200,
           is_active: true,
+          period_in_days: 30,
         },
         {
           id: 2,
-          name: 'OTT VIP (monthly plan)',
-          price: 200,
+          name: 'OTT Professional (monthly plan)',
+          price: 400,
           is_active: true,
-        },
-        {
-          id: 3,
-          name: 'OTT VIP (monthly plan)',
-          price: 600,
-          is_active: true,
-        },
-        {
-          id: 4,
-          name: 'OTT VIP (annually plan)',
-          price: 2400,
-          is_active: true,
+          period_in_days: 30,
         },
       ].map(e => ({
         ...e,

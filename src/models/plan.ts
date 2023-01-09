@@ -8,6 +8,7 @@ export interface PlanAttributes {
   name: string;
   price: number;
   isActive: boolean;
+  periodInDays: number;
 
   services?: ServiceAttributes[] | undefined;
 }
@@ -26,6 +27,8 @@ export class Plan
   public price!: number;
 
   public isActive!: boolean;
+
+  public periodInDays!: number;
 
   // timestamps!
   public readonly createdAt!: Date;
@@ -50,6 +53,10 @@ export class Plan
         },
         isActive: {
           type: DataTypes.STRING,
+          allowNull: false,
+        },
+        periodInDays: {
+          type: DataTypes.INTEGER.UNSIGNED,
           allowNull: false,
         },
       },
