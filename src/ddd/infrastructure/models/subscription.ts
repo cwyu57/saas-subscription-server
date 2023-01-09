@@ -3,7 +3,7 @@ import { ModelsInterface } from '.';
 import {
   SubscriptionAttributes,
   SubscriptionCreationAttributes,
-} from '../ddd/domain/entity';
+} from '../../domain/entity';
 
 // These are all the attributes in the Service model
 

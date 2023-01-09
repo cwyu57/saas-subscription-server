@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { errorCodes } from '../../../const';
 import { ResponseError, UserDto, UserEntity } from '../../domain/entity';
 import { UserRepositoryInterface } from '../../domain/repository';
-import SaasSubscriptionModels from '../../../models';
+import SaasSubscriptionModels from '../models';
 
 export class MySqlUserRepository implements UserRepositoryInterface {
   store: SaasSubscriptionModels;

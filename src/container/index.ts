@@ -1,5 +1,5 @@
 import { sequelize } from '../loader';
-import SaasSubscriptionModels from '../models';
+import SaasSubscriptionModels from '../ddd/infrastructure/models';
 import {
   InMemoryUserRepository,
   MySqlUserRepository,

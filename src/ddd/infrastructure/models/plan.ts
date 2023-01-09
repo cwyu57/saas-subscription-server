@@ -1,6 +1,6 @@
 import { Sequelize, Model, DataTypes, ModelCtor } from 'sequelize';
 import { ModelsInterface } from '.';
-import { PlanAttributes, PlanCreationAttributes } from '../ddd/domain/entity';
+import { PlanAttributes, PlanCreationAttributes } from '../../domain/entity';
 
 export class Plan
   extends Model<PlanAttributes, PlanCreationAttributes>

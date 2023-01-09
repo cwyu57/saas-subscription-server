@@ -3,7 +3,7 @@ import { ModelsInterface } from '.';
 import {
   PaymentInfoAttributes,
   PaymentInfoCreationAttributes,
-} from '../ddd/domain/entity';
+} from '../../domain/entity';
 
 // These are all the attributes in the Service model
 

@@ -1,5 +1,5 @@
 import { PaymentRepositoryInterface } from '../../domain/repository';
-import SaasSubscriptionModels from '../../../models';
+import SaasSubscriptionModels from '../models';
 import { PayByPrimeResponse, PayByPrimeInput } from '../service';
 
 export class MySqlPaymentRepository implements PaymentRepositoryInterface {

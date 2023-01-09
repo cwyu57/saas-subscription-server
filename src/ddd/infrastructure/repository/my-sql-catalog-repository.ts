@@ -1,7 +1,7 @@
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 import { PlanEntity, ResponseError } from '../../domain/entity';
 import { CatalogRepositoryInterface } from '../../domain/repository';
-import SaasSubscriptionModels from '../../../models';
+import SaasSubscriptionModels from '../models';
 
 export class MySqlCatalogRepository implements CatalogRepositoryInterface {
   store: SaasSubscriptionModels;

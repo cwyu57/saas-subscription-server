@@ -1,56 +1,60 @@
 import { Sequelize, Model, DataTypes, ModelCtor } from 'sequelize';
 import { ModelsInterface } from '.';
 import {
-  OrdersAttributes,
-  OrdersCreationAttributes,
-} from '../ddd/domain/entity';
+  ServiceAttributes,
+  ServiceCreationAttributes,
+} from '../../domain/entity';
 
-export class Order
-  extends Model<OrdersAttributes, OrdersCreationAttributes>
-  implements OrdersAttributes
+export class Service
+  extends Model<ServiceAttributes, ServiceCreationAttributes>
+  implements ServiceAttributes
 {
   public id!: number; // Note that the `null assertion` `!` is required in strict mode.
 
-  public periodIndex!: number;
+  public code!: string;
 
-  public subscriptionId!: number;
+  public name!: string;
 
   // timestamps!
   public readonly createdAt!: Date;
 
   public readonly updatedAt!: Date;
 
-  static factory(sequelize: Sequelize): ModelCtor<Order> {
-    Order.init(
+  static factory(sequelize: Sequelize): ModelCtor<Service> {
+    Service.init(
       {
         id: {
           type: DataTypes.INTEGER.UNSIGNED,
           primaryKey: true,
           autoIncrement: true,
         },
-        periodIndex: {
-          type: DataTypes.INTEGER.UNSIGNED,
+        code: {
+          type: DataTypes.STRING(255),
           allowNull: false,
         },
-        subscriptionId: {
-          type: DataTypes.INTEGER.UNSIGNED,
+        name: {
+          type: DataTypes.STRING(255),
           allowNull: false,
         },
       },
       {
-        tableName: 'orders',
+        tableName: 'services',
         sequelize, // passing the `sequelize` instance is required
         underscored: true,
         paranoid: true,
       },
     );
-    return Order as ModelCtor<Order>;
+    return Service as ModelCtor<Service>;
   }
 
   static associate(models: ModelsInterface): void {
-    Order.belongsTo(models.Subscription, {
-      foreignKey: 'subscription_id',
-      as: 'subscription',
+    Service.belongsToMany(models.Plan, {
+      through: { model: models.ServiceIncluded },
+      foreignKey: {
+        field: 'service_id',
+        name: 'serviceId',
+      },
+      as: 'plans',
       constraints: false,
     });
   }

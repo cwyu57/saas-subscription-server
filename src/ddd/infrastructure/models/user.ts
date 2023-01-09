@@ -1,6 +1,6 @@
 import { Sequelize, Model, DataTypes, ModelCtor } from 'sequelize';
 import { ModelsInterface } from '.';
-import { UserAttributes, UserCreationAttributes } from '../ddd/domain/entity';
+import { UserAttributes, UserCreationAttributes } from '../../domain/entity';
 
 export class User
   extends Model<UserAttributes, UserCreationAttributes>
