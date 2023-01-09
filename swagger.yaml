@@ -197,6 +197,15 @@ components:
               data:
                 type: object
 
+    200-subscriptions:
+      description: OK
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: object
+
     200-suspend-plan:
       description: OK
       content:
@@ -413,6 +422,18 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/200-get-plans'
+
+  /payment/v1/subscriptions:
+    get:
+      tags:
+        - payment
+      operationId: /payment/v1/subscriptions
+      description: 訂閱方案
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          $ref: '#/components/responses/200-subscriptions'
 
   /payment/v1/subscribe-plan:
     post:
