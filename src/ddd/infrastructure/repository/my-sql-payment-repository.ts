@@ -1,3 +1,5 @@
+import { ReasonPhrases, StatusCodes } from 'http-status-codes';
+import { ResponseError, SubscriptionEntity } from '../../domain/entity';
 import { PaymentRepositoryInterface } from '../../domain/repository';
 import SaasSubscriptionModels from '../models';
 import { PayByPrimeResponse, PayByPrimeInput } from '../service';
@@ -21,6 +23,14 @@ export class MySqlPaymentRepository implements PaymentRepositoryInterface {
         transaction: t,
       });
 
+      if (!plan) {
+        throw new ResponseError(
+          'plan not found',
+          StatusCodes.NOT_FOUND,
+          ReasonPhrases.NOT_FOUND,
+        );
+      }
+
       const paymentInfo = await this.store.PaymentInfo.create(
         {
           cardKey: payByPrimeResponse.card_secret.card_key,
@@ -36,15 +46,15 @@ export class MySqlPaymentRepository implements PaymentRepositoryInterface {
 
       const subscription = await this.store.Subscription.create(
         {
-          validTo: Date.now() + plan!.periodInDays * 86400 * 1000,
-          planId: plan!.id,
+          validTo: Date.now() + plan.periodInDays * 86400 * 1000,
+          planId: plan.id,
           userId,
           paymentInfoId: paymentInfo.id,
         },
         { transaction: t },
       );
 
-      const order = await this.store.Order.create(
+      await this.store.Order.create(
         {
           periodIndex: 1,
           subscriptionId: subscription.id,
@@ -54,7 +64,7 @@ export class MySqlPaymentRepository implements PaymentRepositoryInterface {
     });
   }
 
-  async getSubscriptions(userId: string): Promise<any> {
+  async getSubscriptions(userId: string): Promise<SubscriptionEntity[]> {
     const subscriptions = await this.store.Subscription.findAll({
       where: {
         userId,
@@ -68,9 +78,13 @@ export class MySqlPaymentRepository implements PaymentRepositoryInterface {
           model: this.store.PaymentInfo,
           as: 'paymentInfo',
         },
+        {
+          model: this.store.Plan,
+          as: 'plan',
+        },
       ],
     });
 
-    return subscriptions.map(e => e.toJSON());
+    return subscriptions.map(e => new SubscriptionEntity(e));
   }
 }

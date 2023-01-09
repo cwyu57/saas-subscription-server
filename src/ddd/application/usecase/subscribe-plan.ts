@@ -45,6 +45,18 @@ export class SubscribePlansUseCase {
       );
     }
 
+    const subscriptions = await this.paymentRepository.getSubscriptions(
+      input.userId,
+    );
+
+    if (subscriptions.length !== 0) {
+      throw new ResponseError(
+        'already subscribe a plan',
+        StatusCodes.BAD_REQUEST,
+        ReasonPhrases.BAD_REQUEST,
+      );
+    }
+
     const payByPrimeResponse = await this.tapPayPaymentService.payByPrime({
       prime: input.prime,
       amount: plan.id,
@@ -73,5 +85,7 @@ export class SubscribePlansUseCase {
       },
       payByPrimeResponse,
     );
+
+    return `恭喜你成功升級 ${plan.name}`;
   }
 }

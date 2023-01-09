@@ -2,6 +2,7 @@ import {
   PayByPrimeInput,
   PayByPrimeResponse,
 } from '../../infrastructure/service';
+import { SubscriptionEntity } from '../entity';
 
 export interface PaymentRepositoryInterface {
   subscribeToPlan: (
@@ -10,5 +11,5 @@ export interface PaymentRepositoryInterface {
     payByPrimeInput: PayByPrimeInput,
     payByPrimeResponse: PayByPrimeResponse,
   ) => Promise<void>;
-  getSubscriptions: (userId: string) => Promise<any>;
+  getSubscriptions: (userId: string) => Promise<SubscriptionEntity[]>;
 }

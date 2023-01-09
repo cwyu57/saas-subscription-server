@@ -122,7 +122,7 @@ components:
                   phone_number:
                     description: cardholder phone number
                     type: string
-                    example: 0912345678
+                    example: '0912345678'
             required:
               - planId
               - prime

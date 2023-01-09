@@ -4,6 +4,9 @@ import {
   SubscriptionAttributes,
   SubscriptionCreationAttributes,
 } from '../../domain/entity';
+import { PaymentInfo } from './payment-info';
+import { Order } from './order';
+import { Plan } from './plan';
 
 // These are all the attributes in the Service model
 
@@ -18,6 +21,12 @@ export class Subscription
   public planId!: number; // Note that the `null assertion` `!` is required in strict mode.
 
   public userId!: string; // Note that the `null assertion` `!` is required in strict mode.
+
+  public paymentInfo?: PaymentInfo | undefined;
+
+  public plan?: Plan | undefined;
+
+  public orders?: Order[] | undefined;
 
   // timestamps!
   public readonly createdAt!: Date;
@@ -41,6 +50,9 @@ export class Subscription
         userId: {
           type: DataTypes.UUID,
         },
+        paymentInfoId: {
+          type: DataTypes.INTEGER.UNSIGNED,
+        },
       },
       {
         tableName: 'subscriptions',
@@ -58,11 +70,11 @@ export class Subscription
     //   as: 'user',
     //   constraints: false,
     // });
-    // Subscription.belongsTo(models.Plan, {
-    //   foreignKey: 'plan_id',
-    //   as: 'plan',
-    //   constraints: false,
-    // });
+    Subscription.belongsTo(models.Plan, {
+      foreignKey: 'plan_id',
+      as: 'plan',
+      constraints: false,
+    });
     Subscription.belongsTo(models.PaymentInfo, {
       foreignKey: {
         field: 'payment_info_id',

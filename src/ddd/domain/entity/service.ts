@@ -9,7 +9,7 @@ export interface ServiceAttributes {
 export interface ServiceCreationAttributes
   extends Omit<ServiceAttributes, 'id'> {}
 
-export class ServiceEntity {
+export class ServiceEntity implements ServiceAttributes {
   id: number;
 
   code: string;

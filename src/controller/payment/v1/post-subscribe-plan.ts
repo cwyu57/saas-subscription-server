@@ -16,13 +16,13 @@ export const v1PostSubscribe: express.Handler = async (req, res) => {
     tapPayPaymentService,
   );
 
-  await subscribePlanUseCase.exec({
+  const output = await subscribePlanUseCase.exec({
     cardholder: req.body.cardholder,
     planId: req.body.planId,
     prime: req.body.prime,
     userId,
   });
   return res.status(StatusCodes.OK).json({
-    data: '',
+    data: output,
   });
 };
