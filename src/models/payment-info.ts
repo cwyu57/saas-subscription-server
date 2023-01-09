@@ -93,7 +93,10 @@ export class PaymentInfo
 
   static associate(models: ModelsInterface): void {
     PaymentInfo.hasOne(models.Subscription, {
-      foreignKey: 'payment_info_id',
+      foreignKey: {
+        field: 'payment_info_id',
+        name: 'paymentInfoId',
+      },
       as: 'subscription',
       constraints: false,
     });

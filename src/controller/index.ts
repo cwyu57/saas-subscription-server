@@ -1,4 +1,5 @@
 export * from './catalog/v1/get-plans';
+export * from './payment/v1/get-subscriptions';
 export * from './payment/v1/post-subscribe-plan';
 export * from './payment/v1/post-suspend-plan';
 export * from './system/v1/get-config';

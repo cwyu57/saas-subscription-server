@@ -57,4 +57,24 @@ export class MySqlPaymentRepository implements PaymentRepositoryInterface {
       );
     });
   }
+
+  async getSubscriptions(userId: string): Promise<any> {
+    const subscriptions = await this.store.Subscription.findAll({
+      where: {
+        userId,
+      },
+      include: [
+        {
+          model: this.store.Order,
+          as: 'orders',
+        },
+        {
+          model: this.store.PaymentInfo,
+          as: 'paymentInfo',
+        },
+      ],
+    });
+
+    return subscriptions.map(e => e.toJSON());
+  }
 }

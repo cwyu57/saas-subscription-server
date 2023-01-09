@@ -10,4 +10,5 @@ export interface PaymentRepositoryInterface {
     payByPrimeInput: PayByPrimeInput,
     payByPrimeResponse: PayByPrimeResponse,
   ) => Promise<void>;
+  getSubscriptions: (userId: string) => Promise<any>;
 }

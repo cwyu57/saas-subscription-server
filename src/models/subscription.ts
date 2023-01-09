@@ -69,12 +69,18 @@ export class Subscription
     //   constraints: false,
     // });
     Subscription.belongsTo(models.PaymentInfo, {
-      foreignKey: 'payment_info_id',
+      foreignKey: {
+        field: 'payment_info_id',
+        name: 'paymentInfoId',
+      },
       as: 'paymentInfo',
       constraints: false,
     });
     Subscription.hasMany(models.Order, {
-      foreignKey: 'subscription_id',
+      foreignKey: {
+        field: 'subscription_id',
+        name: 'subscriptionId',
+      },
       as: 'orders',
       constraints: false,
     });
