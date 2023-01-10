@@ -1,5 +1,5 @@
 import * as fs from 'fs';
 import { config } from '../config';
 
-export const privateKey = fs.readFileSync(config.privateKeyPath);
-export const publicKey = fs.readFileSync(config.publicKeyPath);
+export const privateKey = Buffer.from(config.privateKeyBase64Str, 'base64');
+export const publicKey = Buffer.from(config.publicKeyBase64Str, 'base64');

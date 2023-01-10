@@ -15,9 +15,9 @@ export class Config {
 
   databaseMaxRetry: number;
 
-  privateKeyPath: string;
+  privateKeyBase64Str: string;
 
-  publicKeyPath: string;
+  publicKeyBase64Str: string;
 
   swaggerUsername: string;
 
@@ -59,11 +59,15 @@ export class Config {
     if (!env.DB_MAX_RETRY) {
       throw new Error('missing environemnt variable DB_MAX_RETRY');
     }
-    if (!env.PRIVATE_KEY_PATH) {
-      throw new Error('missing environemnt variable PRIVATE_KEY_PATH');
+    if (!env.PRIVATE_KEY_PATH_BASE64_STR) {
+      throw new Error(
+        'missing environemnt variable PRIVATE_KEY_PATH_BASE64_STR',
+      );
     }
-    if (!env.PUBLIC_KEY_PATH) {
-      throw new Error('missing environemnt variable PUBLIC_KEY_PATH');
+    if (!env.PUBLIC_KEY_PATH_BASE64_STR) {
+      throw new Error(
+        'missing environemnt variable PUBLIC_KEY_PATH_BASE64_STR',
+      );
     }
     if (!env.SWAGGER_USERNAME) {
       throw new Error('missing environemnt variable SWAGGER_USERNAME');
@@ -93,8 +97,8 @@ export class Config {
     this.databaseMaxConnection = parseInt(env.DB_MAX_CONNECTION, 10);
     this.databaseMaxRetry = parseInt(env.DB_MAX_RETRY, 10);
 
-    this.privateKeyPath = env.PRIVATE_KEY_PATH;
-    this.publicKeyPath = env.PUBLIC_KEY_PATH;
+    this.privateKeyBase64Str = env.PRIVATE_KEY_PATH_BASE64_STR;
+    this.publicKeyBase64Str = env.PUBLIC_KEY_PATH_BASE64_STR;
     this.swaggerUsername = env.SWAGGER_USERNAME;
     this.swaggerPassword = env.SWAGGER_PASSWORD;
     this.systemApiKey = env.SYSTEM_API_KEY;

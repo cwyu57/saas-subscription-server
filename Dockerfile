@@ -6,6 +6,7 @@ RUN npm run build
 
 FROM node:16-alpine
 WORKDIR /usr/src/app
+COPY .env.* .
 COPY package*.json .
 COPY swagger.yaml .
 RUN npm ci --only=production
