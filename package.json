@@ -8,6 +8,7 @@
     "dev": "nodemon --config nodemon.json --exec NODE_ENV=development ts-node -r dotenv-flow/config src/server.ts",
     "staging": "nodemon --config nodemon.json --exec NODE_ENV=staging ts-node -r dotenv-flow/config src/server.ts",
     "docker-build-dev": "docker build -t saas-subscription-server .",
+    "docker-build-dev-amd64": "docker buildx build --platform linux/amd64 -t saas-subscription-server .",
     "docker-run-dev": "docker run --rm --env NODE_ENV=development --env DB_HOST=host.docker.internal --env-file=.env.development.local -v $PWD/local:/usr/src/app/local -p 8080:8080 saas-subscription-server",
     "format": "prettier --write .",
     "lint": "eslint --fix 'src/**/*.ts'",
