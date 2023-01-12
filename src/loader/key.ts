@@ -1,4 +1,3 @@
-import * as fs from 'fs';
 import { config } from '../config';
 
 export const privateKey = Buffer.from(config.privateKeyBase64Str, 'base64');
