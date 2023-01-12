@@ -12,7 +12,7 @@ describe('POST /member/v1/phone-register', () => {
   beforeAll(done => {
     if (
       process.env.NODE_ENV === 'jest' &&
-      process.env.DB_DATABASE === 'saas-subscription'
+      process.env.DB_DATABASE === 'SaasSubscription'
     ) {
       // WARINING: force sync database
       console.log('start syncing database');
