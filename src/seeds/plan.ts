@@ -17,7 +17,7 @@ export default {
         },
         {
           id: 2,
-          name: 'OTT Professional (monthly plan)',
+          name: 'OTT Premium (monthly plan)',
           price: 400,
           is_active: true,
           period_in_days: 30,
