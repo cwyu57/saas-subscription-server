@@ -23,7 +23,7 @@ app.use(systemRouter);
 app.use(userRouter);
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('Hello CakeResume!');
 });
 
 app.use(errorHandler);
